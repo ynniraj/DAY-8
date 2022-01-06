@@ -83,3 +83,7 @@ const appendVideos = (videos) => {
     });
 };
 searchVideo();
+
+document.getElementById("img").addEventListener("click", function () {
+    window.location.href = "youtube.html"
+})
