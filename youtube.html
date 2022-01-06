@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .navbar {
+        width: 100%;
+      }
+      .navbar img {
+        width: 12%;
+        margin-right: 18%;
+      }
+      nav {
+        display: flex;
+        justify-content: space-around;
+        padding: 8px;
+        margin-top: 10px;
+      }
+      .input {
+        width: 40%;
+        display: flex;
+      }
+      .input input {
+        height: 100%;
+        width: 80%;
+        border: 1px solid lightgray;
+        outline: none;
+        font-size: 18px;
+        padding-left: 5px;
+      }
+      .input input::placeholder {
+        font-size: 18px;
+      }
+      .input button {
+        font-size: 22px;
+        margin-top: 0px;
+        padding: 1px 12px;
+        border: 1px solid lightgray;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .main {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas: "s a a a a a";
+      }
+      .sidenav {
+        grid-area: s;
+       
+      }
+
+      .disContainer {
+        grid-area: a;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 0 20px;
+      }
+      #displayData {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 50px;
+        cursor: pointer;
+      }
+
+      #displayData div img {
+        width: 100%;
+      }
+      #displayData div p {
+        font-size: 14px;
+        padding: 5px 0px 5px 10px;
+      }
+      #displayData div h5 {
+        font-size: 14px;
+        font-weight: 400;
+        color: #606060;
+        padding: 0px 0px 5px 10px;
+      }
+      .links {
+        margin-top: 24px;
+        margin-left: 12px;
+      }
+      .links ul li {
+        padding: 12px 20px;
+        font-size: 16px;
+        transition: 0.3s ease;
+        cursor: pointer;
+      }
+      .links ul li i {
+        padding-right: 14px;
+        font-size: 16px;
+      }
+      .links ul li:hover {
+        background-color: rgb(230, 224, 224);
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 8%;
+      }
+      .icons i {
+        padding: 0 26px 0 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .icons i:nth-child(1) {
+        padding-right: 82%;
+      }
+      .icons i:nth-child(4) {
+        font-size: 25px;
+      }
+      hr {
+        margin-top: 12px;
+        margin-left: 18%;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .buttons button {
+        font-size: 16px;
+        margin: 14px 14px 0 10px;
+        padding: 7px 16px;
+        background-color: #f2f2f2;
+        outline: none;
+        border: 1px solid lightgrey;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+      .buttons button:hover {
+        background-color: lightgray;
+      }
+      .buttons button:nth-child(1) {
+        background-color: black;
+        color: white;
+      }
+      .hr {
+        margin-left: -4px;
+        color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <nav>
+        <img
+          src="https://blog.logomyway.com/wp-content/uploads/2020/09/youtube-logo-4.jpg"
+          alt=""
+        />
+
+        <div class="input">
+          <input type="text" id="video" placeholder="Search" />
+          <button onclick="searchVideo()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="icons">
+          <i class="fas fa-microphone"></i>
+          <i class="far fa-play-circle"></i>
+          <i class="far fa-bell"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </nav>
+    </div>
+    <hr />
+    <div class="buttons">
+      <button>All</button>
+      <button>Comedies</button>
+      <button>Thrillers</button>
+      <button>Spider-Man</button>
+      <button>Conversation</button>
+      <button>Sci-fi Films</button>
+      <button>Gaming</button>
+      <button>Songs</button>
+      <button>Bollywood</button>
+    </div>
+    <div class="main">
+      <div class="sidenav">
+        <div class="links">
+          <ul>
+            <li><i class="fas fa-home"></i> Home</li>
+          </ul>
+          <ul>
+            <li><i class="far fa-compass"></i> Explore</li>
+          </ul>
+          <ul>
+            <li><i class="fas fa-video"></i>Subscription</li>
+          </ul>
+          <hr class="hr" />
+          <ul>
+            <li><i class="fas fa-book-open"></i>Library</li>
+          </ul>
+          <ul>
+            <li><i class="fas fa-history"></i> History</li>
+          </ul>
+          <ul>
+            <li><i class="far fa-play-circle"></i>Your videos</li>
+          </ul>
+          <ul>
+            <li><i class="far fa-clock"></i>Watch later</li>
+          </ul>
+          <ul>
+            <li><i class="far fa-thumbs-up"></i>Liked videos</li>
+          </ul>
+          <ul>
+            <li><i class="fas fa-chevron-down"></i>Show More</li>
+          </ul>
+        </div>
+      </div>
+      <div class="disContainer">
+        <div id="displayData"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  const displayData = document.getElementById("displayData");
+  searchVideo();
+  async function searchVideo() {
+    try {
+      let video_query = document.getElementById("video").value;
+      let response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${video_query}&regionCode=IN&type=video&type=channel&key=AIzaSyCK-xjDI99YafTQ38KLncrvEaRz-m3Wjas`
+      );
+
+      let data = await response.json();
+
+      let videos = data.items;
+      appendVideos(videos);
+      console.log(videos);
+    } catch (er) {
+      console.log("er:", er);
+    }
+  }
+
+  const appendVideos = (videos) => {
+    displayData.innerHTML = null;
+    videos.forEach(({ snippet, id: { videoId } }) => {
+      // let {
+      //   id: { videoId },
+      // } = elem;
+      console.log(snippet);
+      //let v_Id = elem.id.videoId;
+      let div = document.createElement("div");
+
+      // let iframe = document.createElement("iframe");
+      // iframe.src = `https://www.youtube.com/embed/${videoId}`;
+      // iframe.height = "200";
+      // iframe.width = "400";
+      // iframe.setAttribute("allowfullscreen", "true");
+      //  console.log(videoId);
+      let title = document.createElement("p");
+      title.innerText = snippet.title;
+      let channelname = document.createElement("h5");
+      channelname.innerText = snippet.channelTitle;
+      let thub = document.createElement("img");
+      thub.src = snippet.thumbnails.medium.url;
+
+      let dataSend = {
+        snippet,
+        videoId,
+      };
+
+      div.onclick = () => {
+        showVideo(dataSend);
+      };
+
+      div.append(thub, title, channelname);
+      displayData.append(div);
+    });
+  };
+
+  function showVideo(data) {
+    localStorage.setItem("youtubeVideo", JSON.stringify(data));
+    window.location.href = "video.html";
+  }
+</script>
+
+<!-- <iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/LMZPnwz_dT0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe> -->
+
+<!-- GET  HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json -->
+
+<!-- 2nd -->
+<!-- GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&location=india&maxResults=20&order=viewCount&q=tesla&regionCode=IN&type=video&key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json -->
+
+<!-- 1st -->
+<!-- GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=tela&regionCode=IN&type=video&type=channel&key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json -->

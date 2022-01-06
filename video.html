@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube-Video</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .navbar {
+        width: 100%;
+      }
+      .navbar img {
+        width: 12%;
+        margin-right: 18%;
+      }
+      nav {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        margin-top: 4px;
+      }
+      .input {
+        width: 40%;
+        display: flex;
+      }
+      .input input {
+        height: 100%;
+        width: 80%;
+        border: 1px solid lightgray;
+        outline: none;
+        font-size: 18px;
+        padding-left: 5px;
+      }
+      .input input::placeholder {
+        font-size: 18px;
+      }
+      button {
+        font-size: 22px;
+        margin-top: 0px;
+        padding: 1px 12px;
+        border: 1px solid lightgray;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .iconsVid {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: -24px;
+        margin-right: 30px;
+      }
+      .iconsVid i {
+        padding: 0 3px 0 34px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 8%;
+      }
+      .icons i {
+        padding: 0 26px 0 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .icons i:nth-child(1) {
+        padding-right: 82%;
+      }
+      .icons i:nth-child(4) {
+        font-size: 25px;
+      }
+
+      #main {
+        display: flex;
+        height: 600px;
+      }
+      #display {
+        background-color: whitesmoke;
+        flex: 2;
+      }
+      #display iframe {
+        width: 100%;
+        padding: 30px 30px 0 70px;
+        outline: none;
+      }
+      #display p:nth-child(3) {
+        padding: 16px 30px 0 80px;
+        font-size: 14px;
+      }
+      #display p {
+        padding: 16px 30px 0 80px;
+        font-size: 20px;
+      }
+      #recc {
+        flex: 1;
+        background-color: whitesmoke;
+        overflow: scroll;
+        /* display: scroll; */
+      }
+      .rightnav {
+        display: flex;
+        padding: 24px 10px 0 10px;
+      }
+      .rightnav div {
+        padding: 6px 5px 0 8px;
+      }
+      .rightnav div p {
+        font-size: 14px;
+        padding-bottom: 10px;
+      }
+      .rightnav div h5 {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      #recc div img {
+        width: 42%;
+        height: 100px;
+      }
+      .hr {
+        margin: 20px 16px 0 52px;
+        color: lightgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <nav>
+        <img
+          src="https://blog.logomyway.com/wp-content/uploads/2020/09/youtube-logo-4.jpg"
+          alt=""
+        />
+
+        <div class="input">
+          <input type="text" id="video" placeholder="Search" />
+          <button onclick="searchVideo()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="icons">
+          <i class="fas fa-microphone"></i>
+          <i class="far fa-play-circle"></i>
+          <i class="far fa-bell"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </nav>
+    </div>
+    <div id="main">
+      <div id="display"></div>
+      <div id="recc"></div>
+    </div>
+  </body>
+</html>
+<script>
+  let { videoId, snippet } = JSON.parse(localStorage.getItem("youtubeVideo"));
+
+  let videoDiv = document.getElementById("display");
+  function showData(data) {
+    let iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.height = "400";
+    iframe.width = "100%";
+    iframe.setAttribute("allowfullscreen", "true");
+    console.log(snippet);
+
+    let title = document.createElement("p");
+    title.innerText = snippet.title;
+    let publish = document.createElement("p");
+    publish.innerText = snippet.publishTime;
+    let channel = document.createElement("p");
+    channel.innerText = snippet.channelTitle;
+    let dec = document.createElement("p");
+    dec.innerText = snippet.description;
+    var hr = document.createElement("hr");
+    hr.setAttribute("class", "hr");
+
+    var iconsVid = document.createElement("div");
+    iconsVid.setAttribute("class", "iconsVid");
+
+    var like = document.createElement("span");
+    like.innerHTML = `<i class="far fa-thumbs-up"></i>Like`;
+    var dislike = document.createElement("span");
+    dislike.innerHTML = `<i class="far fa-thumbs-down"></i>Dislike`;
+    var share = document.createElement("span");
+    share.innerHTML = `<i class="fas fa-share"></i>Share`;
+    var more = document.createElement("span");
+    more.innerHTML = `<i class="fas fa-ellipsis-h"></i>More`;
+
+    iconsVid.append(like, dislike, share, more);
+    videoDiv.append(iframe, title, publish, channel, iconsVid, hr, dec);
+  }
+
+  showData();
+
+  const recc = document.getElementById("recc");
+  async function searchVideo() {
+    try {
+      let video_query = document.getElementById("video").value;
+      let response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${snippet.title}&regionCode=IN&type=video&type=channel&key=AIzaSyCK-xjDI99YafTQ38KLncrvEaRz-m3Wjas`
+      );
+
+      let data = await response.json();
+
+      let videos = data.items;
+      appendVideos(videos);
+      console.log(videos);
+    } catch (er) {
+      console.log("er:", er);
+    }
+  }
+
+  const appendVideos = (videos) => {
+    recc.innerHTML = null;
+    videos.forEach(({ snippet, id: { videoId } }) => {
+      console.log(snippet);
+
+      let div = document.createElement("div");
+      div.setAttribute("class", "rightnav");
+      let div2 = document.createElement("div");
+
+      let title = document.createElement("p");
+      title.innerText = snippet.title;
+      let channelname = document.createElement("h5");
+      channelname.innerText = snippet.channelTitle;
+      let thub = document.createElement("img");
+      thub.src = snippet.thumbnails.medium.url;
+
+      let dataSend = {
+        snippet,
+        videoId,
+      };
+
+      div2.append(title, channelname);
+      div.append(thub, div2);
+      recc.append(div);
+    });
+  };
+  searchVideo();
+</script>
