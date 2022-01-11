@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        font-family: "Poppins", sans-serif;
+        width: 40%;
+        margin: auto;
+        border: 1px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .container h2 {
+        font-size: 26px;
+        margin: 0;
+        margin-top: -20px;
+        font-weight: 500;
+      }
+      .inputTags {
+        width: 80%;
+        margin: auto;
+      }
+      .inputTags h2 {
+        font-size: 28px;
+        text-align: center;
+        margin-top: -8px;
+      }
+      .inputTags label {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .inputTags input {
+        width: 90%;
+        height: 36px;
+        margin-bottom: 12px;
+        font-size: 18px;
+        outline: none;
+      }
+      .inputTags input::placeholder {
+        font-size: 18px;
+        padding: 0 5px;
+      }
+      #btn {
+        width: 92%;
+        height: 40px;
+        background-color: #1a73e8;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        margin: 14px 0px;
+        cursor: pointer;
+        color: white;
+      }
+      a {
+        color: blue;
+        text-decoration: none;
+      }
+      img {
+        width: 30%;
+        height: 20%;
+      }
+      #validPass {
+        color: red;
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+        margin-bottom: -14px;
+        display: none;
+      }
+      p {
+        margin-top: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="https://s.abcnews.com/images/Technology/ht_google_lb_150901_16x9_992.jpg"
+        alt=""
+      />
+      <h2>One account. All of Google.</h2>
+      <div class="inputTags">
+        <form id="regForm">
+          <h2>Create Account</h2>
+          <label for="name">Name</label> <br />
+
+          <input type="text" id="name" placeholder="Enter Name" />
+
+          <label for="email">Email</label> <br />
+          <input type="text" id="email" placeholder="Enter Your Email" /> <br />
+          <label for="username">Username</label> <br />
+
+          <input type="text" id="username" placeholder="Username" />
+
+          <label for="password">Password</label> <br />
+
+          <input type="text" id="password" placeholder="Password" />
+
+          <label>Mobile number</label> <br />
+          <input type="number" id="mobile" placeholder="Enter Your Number" />
+          <br />
+          <label>Description</label> <br />
+
+          <input type="text" id="description" placeholder="Description" />
+          <p id="validPass"></p>
+
+          <br />
+          <input type="submit" id="btn" />
+        </form>
+        <p>Already have an account? <a href="login.html">Login in</a></p>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  document.getElementById("regForm").addEventListener("submit", Register);
+
+  async function Register(event) {
+    event.preventDefault();
+
+    if (
+      document.querySelector("#password").value == "" &&
+      document.querySelector("#username").value == ""
+    ) {
+      document.querySelector("#validPass").innerHTML = "Enter Valid Details";
+      document.querySelector("#validPass").style.display = "block";
+    } else {
+      try {
+        var register_data = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          username: document.getElementById("username").value,
+          mobile: document.getElementById("mobile").value,
+          description: document.getElementById("description").value,
+        };
+
+        register_data = JSON.stringify(register_data);
+        console.log("data", register_data);
+      } catch (err) {
+        console.log(err);
+      }
+
+      let reg_api = "https://masai-api-mocker.herokuapp.com/auth/register";
+      let response = await fetch(reg_api, {
+        method: "POST",
+        body: register_data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+      if (data.error == true) {
+        document.querySelector("#validPass").textContent =
+          "Account Already Exists";
+        document.querySelector("#validPass").style.display = "block";
+      } else {
+        window.location.href = "login.html";
+      }
+      console.log(data);
+    }
+    var time = setTimeout(function () {
+      document.querySelector("#validPass").style.display = "none";
+    }, 3000);
+  }
+</script>

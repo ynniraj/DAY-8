@@ -103,15 +103,18 @@ nav {
   padding-right: 8%;
 }
 .icons i {
-  padding: 0 26px 0 10px;
+  padding: 0 26px 0 7px;
   font-size: 20px;
   cursor: pointer;
 }
 .icons i:nth-child(1) {
-  padding-right: 82%;
+  padding-right: 40%;
 }
-.icons i:nth-child(4) {
-  font-size: 25px;
+.icons a i {
+  font-size: 34px;
+}
+a {
+  color: black;
 }
 hr {
   margin-top: 12px;

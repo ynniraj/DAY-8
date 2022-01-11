@@ -59,3 +59,20 @@ function showVideo(data) {
     localStorage.setItem("youtubeVideo", JSON.stringify(data));
     window.location.href = "video.html";
 }
+
+let loginDatas = JSON.parse(localStorage.getItem("userData"))
+getUser()
+async function getUser() {
+    let api = `https://masai-api-mocker.herokuapp.com/user/${loginDatas.username}`;
+
+    let response = await fetch(api, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${loginDatas.token}`,
+        },
+    });
+    let data = await response.json();
+    let appendUser = document.getElementById("username");
+    username.innerText = data.username
+    console.log(data);
+}
