@@ -5,7 +5,7 @@ async function searchVideo() {
     try {
         let video_query = document.getElementById("video").value;
         let response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${video_query}&regionCode=IN&type=video&type=channel&key=AIzaSyCK-xjDI99YafTQ38KLncrvEaRz-m3Wjas`
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${video_query}&regionCode=IN&type=video&type=channel&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI`
         );
 
         let data = await response.json();
@@ -60,8 +60,10 @@ function showVideo(data) {
     window.location.href = "video.html";
 }
 
-let loginDatas = JSON.parse(localStorage.getItem("userData"))
-getUser()
+let loginDatas = JSON.parse(localStorage.getItem("userData"));
+if (loginDatas != null) {
+    getUser();
+}
 async function getUser() {
     let api = `https://masai-api-mocker.herokuapp.com/user/${loginDatas.username}`;
 
@@ -76,3 +78,15 @@ async function getUser() {
     username.innerText = data.username
     console.log(data);
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    let recentImg = localStorage.getItem("recentImg")
+    if (recentImg) {
+        document.getElementById("imgPrev").setAttribute("src", recentImg)
+        document.getElementById("imgPrev").style.width = "36%"
+    }
+})
+
+
+// https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=AIzaSyCK-xjDI99YafTQ38KLncrvEaRz-m3Wjas&part=snippet&maxResults=20

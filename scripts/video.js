@@ -43,7 +43,7 @@ async function searchVideo() {
     try {
         let video_query = document.getElementById("video").value;
         let response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${snippet.title}&regionCode=IN&type=video&type=channel&key=AIzaSyCK-xjDI99YafTQ38KLncrvEaRz-m3Wjas`
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${snippet.title}&regionCode=IN&type=video&type=channel&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI `
         );
 
         let data = await response.json();
@@ -58,7 +58,7 @@ async function searchVideo() {
 
 const appendVideos = (videos) => {
     recc.innerHTML = null;
-    videos.forEach(({ snippet, id: { videoId } }) => {
+    videos.forEach(({ snippet }) => {
         console.log(snippet);
 
         let div = document.createElement("div");
@@ -84,6 +84,35 @@ const appendVideos = (videos) => {
 };
 searchVideo();
 
-document.getElementById("img").addEventListener("click", function () {
+document.querySelector(".logo").addEventListener("click", function () {
     window.location.href = "youtube.html"
+})
+
+
+let loginDatas = JSON.parse(localStorage.getItem("userData"));
+if (loginDatas != null) {
+    getUser();
+}
+async function getUser() {
+    let api = `https://masai-api-mocker.herokuapp.com/user/${loginDatas.username}`;
+
+    let response = await fetch(api, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${loginDatas.token}`,
+        },
+    });
+    let data = await response.json();
+    let appendUser = document.getElementById("username");
+    username.innerText = data.username
+    console.log(data);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    let recentImg = localStorage.getItem("recentImg")
+    if (recentImg) {
+        document.getElementById("imgPrev").setAttribute("src", recentImg)
+        document.getElementById("imgPrev").style.width = "700%"
+    }
 })
