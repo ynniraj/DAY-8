@@ -87,5 +87,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.querySelector(".logo").addEventListener("click", function () {
-    window.location.href = "youtube.html";
+    window.location.href = "index.html";
 });

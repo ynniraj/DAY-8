@@ -36,7 +36,7 @@ async function login(event) {
         localStorage.setItem("userData", JSON.stringify(user));
         // getUser(username, data.token);
         if (data.error == false) {
-            window.location.href = "youtube.html";
+            window.location.href = "index.html";
         }
         console.log(data);
     }

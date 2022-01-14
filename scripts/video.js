@@ -85,7 +85,7 @@ const appendVideos = (videos) => {
 searchVideo();
 
 document.querySelector(".logo").addEventListener("click", function () {
-    window.location.href = "youtube.html"
+    window.location.href = "index.html"
 })
 
 
