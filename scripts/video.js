@@ -43,7 +43,7 @@ async function searchVideo() {
     try {
         let video_query = document.getElementById("video").value;
         let response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=viewCount&q=${snippet.title}&regionCode=IN&type=video&type=channel&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI `
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&order=viewCount&q=${snippet.title}&regionCode=IN&type=video&type=channel&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI`
         );
 
         let data = await response.json();

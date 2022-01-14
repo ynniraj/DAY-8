@@ -4,7 +4,7 @@ async function searchVideo() {
     try {
         let video_query = document.getElementById("video").value;
         let response = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI&part=snippet&maxResults=20&part=statistics`
+            `https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=AIzaSyCnuOGuunVmorG5VpeEKXK2nufzxpMqyjI&part=snippet&maxResults=10&part=statistics`
         );
 
         let data = await response.json();
@@ -39,7 +39,7 @@ const appendVideos = (videos) => {
         thub.src = snippet.thumbnails.medium.url;
 
         let viewCount = document.createElement("p");
-        viewCount.innerText = statistics.viewCount + " K";
+        viewCount.innerText = statistics.viewCount + "K" + " Views";
         let dataSend = {
             snippet,
             videoId,
